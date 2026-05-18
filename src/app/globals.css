@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* shadcn/ui tokens */
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
+    --primary: 5 150 105;
+    --primary-foreground: 255 255 255;
+    --secondary: 241 245 249;
+    --secondary-foreground: 15 23 42;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;
+    --accent: 236 253 245;
+    --accent-foreground: 4 120 87;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 5 150 105;
+  }
+
+  * {
+    border-color: theme(colors.ink.border);
+  }
+
+  body {
+    color: theme(colors.ink.DEFAULT);
+    background: theme(colors.ink.surface);
+  }
+
+  /* Scrollbar sutil */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: theme(colors.ink.border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: theme(colors.ink.subtle); }
+
+  /* Focus ring padrão */
+  *:focus-visible {
+    outline: 2px solid theme(colors.brand.DEFAULT);
+    outline-offset: 2px;
+  }
+
+  /* Seleção de texto */
+  ::selection {
+    background: theme(colors.brand.100);
+    color: theme(colors.brand.800);
+  }
+}
+
+@layer components {
+  /* Status badge base */
+  .status-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-label font-medium;
+  }
+
+  /* Sidebar link */
+  .sidebar-link {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-md text-body-1 text-ink-muted
+           transition-colors hover:bg-white/60 hover:text-ink;
+  }
+  .sidebar-link.active {
+    @apply bg-white text-ink font-medium shadow-card;
+  }
+
+  /* Métrica card */
+  .metric-card {
+    @apply bg-white rounded-lg border border-ink-border p-4 shadow-card;
+  }
+
+  /* Botão de ação primária padrão */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md bg-brand text-white
+           text-body-1 font-medium transition-colors hover:bg-brand-700
+           focus-visible:shadow-focus disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* OS row highlight */
+  .os-row {
+    @apply border-b border-ink-border hover:bg-ink-surface transition-colors cursor-pointer;
+  }
+}
+
+@layer utilities {
+  /* Densidade de tabela */
+  .table-dense td, .table-dense th { @apply px-3 py-2; }
+  .table-compact td, .table-compact th { @apply px-4 py-3; }
+
+  /* Truncate com tooltip */
+  .truncate-tooltip {
+    @apply truncate cursor-default;
+  }
+
+  /* Mono ID */
+  .id-mono {
+    @apply font-mono text-caption text-ink-muted tracking-tight;
+  }
+}
+
+/* PWA safe area */
+@supports (padding: max(0px)) {
+  .safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  .safe-top    { padding-top:    max(0px,  env(safe-area-inset-top)); }
+}
